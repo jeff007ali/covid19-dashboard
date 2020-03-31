@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Corona News</title>
+    <title>Corona News</title>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Jaldi|Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="./script.js"></script>
 </head>
 <body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-<script src="datamaps.all.min.js"></script>
-<div id="container" style="position: relative; width: 800px; height: 600px; margin: 0 auto;"></div>
-<script>
-    var map = new Datamap({
-        element: document.getElementById('container'),
-        // scope: 'usa'
-        // responsive: true
-    });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="datamaps.world.hires.min.js"></script>
+    <div id="map-container" style="position: fixed; width: 60%; height: 90%; margin: 0 50px;"></div>
 
-    // // Pure JavaScript
-    // window.addEventListener('resize', function() {
-    //     map.resize();
-    // });
-</script>
+    <div class="container">
+        <div class="cards">
+            <a class="card card-hidden" href="#" target="_blank">
+                <span class="card-header" style="background-image: url();">
+                    <span class="card-title">
+                        <h3>Title</h3>
+                    </span>
+                </span>
+                <span class="card-summary">
+                    Article Summary
+                </span>
+                <span class="card-meta">
+                    Published on: XXXX XX, XXXX
+                </span>
+                <span class="card-source">
+                    Published by: XYZ
+                </span>
+            </a>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 </body>
 </html>
