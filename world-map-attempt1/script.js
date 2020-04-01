@@ -83,7 +83,6 @@ function removeExistingArticleCards() {
     oldCards = document.getElementsByClassName('card');
     totalOldCards = oldCards.length;
 
-    // while (document.getElementsByClassName('card'))
     for (var i = totalOldCards - 1; i >= 0; i--) {
         if (!oldCards[i].classList.contains("card-hidden")) {
             oldCards[i].parentNode.removeChild(oldCards[i]);
@@ -91,9 +90,19 @@ function removeExistingArticleCards() {
     }
 }
 
+function countryClicked(country_element) {
+    data = country_element.__data__;
+    var location = data.properties.name;
+    console.log(location);
+    
+    removeExistingArticleCards();
+    callNewsApi(location);
+}
+
 function createWorldMap() {
     var map = new Datamap({
         element: document.getElementById('map-container'),
+        // responsive: true,
         fills: {
             defaultFill: 'rgba(157, 187, 63, 0.85)' // Any hex, color name or rgb/rgba value
         },
@@ -102,46 +111,30 @@ function createWorldMap() {
             highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
             highlightBorderWidth: 2,
             highlightBorderOpacity: 1
-        },
-        done: function(datamap) {
-            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                    alert(geography.properties.name);
-                });
-            }
-        // scope: 'usa'
-        // responsive: true
+        }
     });
+
+    // // to resize map
+    // window.addEventListener('resize', function() {
+    //     map.resize();
+    // });
 }
 
 function mainScript() {
     // create world map
     createWorldMap();
-
-    // click event on map
-    mapObj = document.getElementById('map-container');
-    mapObj.addEventListener("click", get_news_according_to_location);
-
+    // attach onclick event
+    var countries_svg = document.querySelectorAll('path.datamaps-subunit');
+    countries_svg.forEach(element => {
+        element.addEventListener('click', function(){
+            countryClicked(element);
+        });
+      });
+    
     removeExistingArticleCards();
     callNewsApi();
 }
 
-function fetch_location_name(){
-    var name_tt = document.getElementsByClassName('datamaps-hoverover')[0];
-
-    if (name_tt.style.display == "block"){
-        var location = name_tt.getElementsByClassName('hoverinfo')[0].innerText.toLowerCase();
-        console.log(location);
-        return location
-    }
-    return "";
-}
-
-function get_news_according_to_location(){
-    var location = fetch_location_name();
-    if (location != "") {
-        removeExistingArticleCards();
-        callNewsApi(location);
-    } 
-}
-
 document.addEventListener('DOMContentLoaded', mainScript);
+
+
