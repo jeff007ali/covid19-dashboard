@@ -129,6 +129,9 @@ function createWorldMap(worldometer_data) {
             highlightBorderWidth: 2,
             highlightBorderOpacity: 1,
             popupTemplate: function(geography, data) {
+                if (data == null){
+                    return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
+                }
                 return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong><br/><div class="color-box total-cases"></div><span>' + data.total_cases + '</span><br/><div class="color-box total-deaths"></div><span>' + data.total_deaths + '</spna><br/><div class="color-box total-recovered"></div><span>' + data.total_recovered + '</span><br/><div class="color-box recovery-percentage"></div><span>' + data.recovery_percentage + '%</span></div>';
             }
         },
