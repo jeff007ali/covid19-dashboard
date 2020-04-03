@@ -96,10 +96,33 @@ function countryClicked(country_element) {
     console.log(location);
     
     removeExistingArticleCards();
-    callNewsApi(location);
+    // callNewsApi(location);
 }
 
-function createWorldMap() {
+var worldometer_data;
+function getWorldometerData_wrapper(data) {
+    // console.log("data: "+data)
+    worldometer_data = data;
+}
+
+function getWorldometerData() {
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+    
+    var url = "http://51.15.213.116:8000/stats";
+    var req = new Request(url, requestOptions);
+
+    fetch(req)
+    .then(response => response.json())
+    .then(result => createWorldMap(result.country_data))
+    .catch(error => console.log('error', error));
+}
+
+function createWorldMap(worldometer_data) {
+    console.log("in" + worldometer_data);
+
     var map = new Datamap({
         element: document.getElementById('map-container'),
         // responsive: true,
@@ -110,9 +133,21 @@ function createWorldMap() {
             highlightFillColor: '#668700',
             highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
             highlightBorderWidth: 2,
-            highlightBorderOpacity: 1
-        }
+            highlightBorderOpacity: 1,
+            popupTemplate: function(geography, data) {
+                return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong><br/>Total case:' +  data.total_cases + '</div>';
+            }
+        },
+        data: worldometer_data
     });
+
+    // attach onclick event
+    var countries_svg = document.querySelectorAll('path.datamaps-subunit');
+    countries_svg.forEach(element => {
+        element.addEventListener('click', function(){
+            countryClicked(element);
+        });
+      });
 
     // // to resize map
     // window.addEventListener('resize', function() {
@@ -122,17 +157,18 @@ function createWorldMap() {
 
 function mainScript() {
     // create world map
-    createWorldMap();
-    // attach onclick event
-    var countries_svg = document.querySelectorAll('path.datamaps-subunit');
-    countries_svg.forEach(element => {
-        element.addEventListener('click', function(){
-            countryClicked(element);
-        });
-      });
+    getWorldometerData();
+    // // createWorldMap();
+    // // attach onclick event
+    // var countries_svg = document.querySelectorAll('path.datamaps-subunit');
+    // countries_svg.forEach(element => {
+    //     element.addEventListener('click', function(){
+    //         countryClicked(element);
+    //     });
+    //   });
     
     removeExistingArticleCards();
-    callNewsApi();
+    // callNewsApi();
 }
 
 document.addEventListener('DOMContentLoaded', mainScript);
