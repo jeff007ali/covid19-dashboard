@@ -5,6 +5,36 @@
   margin: 0 50px;
 }
 
+.color-box {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background-color: #ccc;
+  margin-right: 2px;
+}
+
+.total-cases {
+  background-color: #d4c415;
+}
+
+.total-deaths {
+  background-color: #ad1515;
+}
+
+.total-recovered {
+  background-color: #1cc9c1;
+}
+
+.recovery-percentage{
+  background-color: #1f4af2;
+}
+
+.note {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;  
+}
+
 .container {
   /* this will need if you want to implement map resize feature */
   /* position: absolute;

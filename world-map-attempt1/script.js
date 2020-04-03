@@ -96,13 +96,7 @@ function countryClicked(country_element) {
     console.log(location);
     
     removeExistingArticleCards();
-    // callNewsApi(location);
-}
-
-var worldometer_data;
-function getWorldometerData_wrapper(data) {
-    // console.log("data: "+data)
-    worldometer_data = data;
+    callNewsApi(location);
 }
 
 function getWorldometerData() {
@@ -135,7 +129,7 @@ function createWorldMap(worldometer_data) {
             highlightBorderWidth: 2,
             highlightBorderOpacity: 1,
             popupTemplate: function(geography, data) {
-                return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong><br/>Total case:' +  data.total_cases + '</div>';
+                return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong><br/><div class="color-box total-cases"></div><span>' + data.total_cases + '</span><br/><div class="color-box total-deaths"></div><span>' + data.total_deaths + '</spna><br/><div class="color-box total-recovered"></div><span>' + data.total_recovered + '</span><br/><div class="color-box recovery-percentage"></div><span>' + data.recovery_percentage + '%</span></div>';
             }
         },
         data: worldometer_data
@@ -158,17 +152,9 @@ function createWorldMap(worldometer_data) {
 function mainScript() {
     // create world map
     getWorldometerData();
-    // // createWorldMap();
-    // // attach onclick event
-    // var countries_svg = document.querySelectorAll('path.datamaps-subunit');
-    // countries_svg.forEach(element => {
-    //     element.addEventListener('click', function(){
-    //         countryClicked(element);
-    //     });
-    //   });
-    
+        
     removeExistingArticleCards();
-    // callNewsApi();
+    callNewsApi();
 }
 
 document.addEventListener('DOMContentLoaded', mainScript);
