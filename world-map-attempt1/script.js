@@ -31,15 +31,15 @@ function callNewsApi(location="") {
 function createNewsCard(articles) {
     console.log("Number of Article: " + articles.length);
     for (var i = 0; i < articles.length; i++) {
-        cardElement = document.getElementsByClassName('card')[0];
+        var cardElement = document.getElementsByClassName('card')[0];
 
         // Clone card element
-        clonedCard = cardElement.cloneNode(true);
+        var clonedCard = cardElement.cloneNode(true);
         assignValuesToClonedCard(clonedCard, articles[i]);
         clonedCard.classList.remove("card-hidden");
         
         // get main cards grid element and append new card to main cards grid
-        cardsGrid = document.getElementsByClassName('cards')[0];
+        var cardsGrid = document.getElementsByClassName('cards')[0];
         cardsGrid.appendChild(clonedCard);
     }
     
@@ -51,20 +51,20 @@ function assignValuesToClonedCard(card, article) {
     // set image of article
     card.getElementsByClassName('card-header')[0].style.backgroundImage = "url('" + article.urlToImage + "')";
     // set header of article
-    clonedCard.getElementsByClassName('card-title')[0].firstElementChild.innerHTML = article.title;
+    card.getElementsByClassName('card-title')[0].firstElementChild.innerHTML = article.title;
     // set content summary of article
     if (article.content && article.content.slice(-6) == "chars]"){
-        clonedCard.getElementsByClassName('card-summary')[0].innerHTML = article.content;
+        card.getElementsByClassName('card-summary')[0].innerHTML = article.content;
     }
     else {
-        clonedCard.getElementsByClassName('card-summary')[0].innerHTML = article.description;
+        card.getElementsByClassName('card-summary')[0].innerHTML = article.description;
     }
     
     // set published data
-    clonedCard.getElementsByClassName('card-meta')[0].innerHTML = "Published on : " + formatDate(article.publishedAt);
+    card.getElementsByClassName('card-meta')[0].innerHTML = "Published on : " + formatDate(article.publishedAt);
 
     // set source of article
-    clonedCard.getElementsByClassName('card-source')[0].innerHTML = "Source : " + article.source.name;
+    card.getElementsByClassName('card-source')[0].innerHTML = "Source : " + article.source.name;
 
 }
 
@@ -80,8 +80,8 @@ function formatDate(strDate) {
 }
 
 function removeExistingArticleCards() {
-    oldCards = document.getElementsByClassName('card');
-    totalOldCards = oldCards.length;
+    var oldCards = document.getElementsByClassName('card');
+    var totalOldCards = oldCards.length;
 
     for (var i = totalOldCards - 1; i >= 0; i--) {
         if (!oldCards[i].classList.contains("card-hidden")) {
@@ -91,7 +91,7 @@ function removeExistingArticleCards() {
 }
 
 function countryClicked(country_element) {
-    data = country_element.__data__;
+    var data = country_element.__data__;
     var location = data.properties.name;
     console.log(location);
     
