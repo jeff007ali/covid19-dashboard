@@ -1,14 +1,14 @@
 function callNewsApi(location="") {
     if (location != "") {        
         var url = 'https://cors-anywhere.herokuapp.com/http://newsapi.org/v2/everything?' +
-            'apiKey=cf0cba3704c24dda85bd20d224a7cc28&' +
+            'apiKey=[NEWSAPI_APIKEY]&' +
             'language=en&' +
             'sortBy=publishedAt&' +
             'qintitle=coronavirus%26' + location;
     }
     else {
         var url = 'https://cors-anywhere.herokuapp.com/http://newsapi.org/v2/top-headlines?' +
-            'apiKey=cf0cba3704c24dda85bd20d224a7cc28&' +
+            'apiKey=[NEWSAPI_APIKEY]&' +
             'sortBy=popularity&' +
             'language=en&' +
             'q=covid-19&' +
