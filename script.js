@@ -1,13 +1,13 @@
 function callNewsApi(location="") {
     if (location != "") {        
-        var url = 'https://cors-anywhere.herokuapp.com/http://newsapi.org/v2/everything?' +
+        var url = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?' +
             'apiKey=[NEWSAPI_APIKEY]&' +
             'language=en&' +
             'sortBy=publishedAt&' +
             'qintitle=coronavirus%26' + location;
     }
     else {
-        var url = 'https://cors-anywhere.herokuapp.com/http://newsapi.org/v2/top-headlines?' +
+        var url = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?' +
             'apiKey=[NEWSAPI_APIKEY]&' +
             'sortBy=popularity&' +
             'language=en&' +
@@ -15,9 +15,13 @@ function callNewsApi(location="") {
             'qintitle=coronavirus';
     }
     
+    var myHeaders = new Headers();
+    myHeaders.append('X-Requested-With', 'XMLHttpRequest');
+
     var requestOptions = {
         method: 'GET',
-        redirect: 'follow'
+        redirect: 'follow',
+        headers: myHeaders
     };
 
     var req = new Request(url, requestOptions);
